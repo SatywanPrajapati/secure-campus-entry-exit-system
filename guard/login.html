@@ -1,0 +1,28 @@
+<!-- Login as -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Guard Login</title>
+</head>
+
+<body>
+
+    <h2>Guard Login</h2>
+
+    <input id="name" placeholder="Enter Name">
+    <br><br>
+    <button onclick="login()">Login</button>
+
+    <script>
+        function login() {
+            const name = document.getElementById("name").value;
+            localStorage.setItem("guardName", name);
+            window.location.href = "scan.html";
+        }
+    </script>
+
+</body>
+
+</html>

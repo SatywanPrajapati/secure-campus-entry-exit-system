@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Login</title>
+</head>
+
+<body>
+
+    <h2>Student Login</h2>
+
+    <input id="roll" placeholder="Enter Roll No">
+    <br><br>
+    <button onclick="login()">Login</button>
+
+    <script>
+        function login() {
+            const roll = document.getElementById("roll").value;
+            localStorage.setItem("studentRoll", roll);
+            window.location.href = "qr.html";
+        }
+    </script>
+
+</body>
+
+</html>
