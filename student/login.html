@@ -1,26 +1,57 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Login</title>
+    <link rel="stylesheet" href="../style/global.css">
 </head>
-
 <body>
+    <main class="shell">
+        <section class="hero">
+            <div>
+                <div class="eyebrow">Student Portal</div>
+                <h2>Login using College ID</h2>
+                <p class="muted">Sample IDs: IITP2024001, IITP2024002, IITP2024003</p>
+            </div>
+            <a class="button-link secondary" href="../index.html">Back to Home</a>
+        </section>
 
-    <h2>Student Login</h2>
+        <section class="panel">
+            <div class="form-group">
+                <label for="collegeId">College ID</label>
+                <input id="collegeId" placeholder="Enter college ID">
+            </div>
+            <div class="actions">
+                <button id="studentLoginButton">Login</button>
+            </div>
+            <div id="studentLoginMessage"></div>
+        </section>
+    </main>
 
-    <input id="roll" placeholder="Enter Roll No">
-    <br><br>
-    <button onclick="login()">Login</button>
-
+    <script src="../shared/config.js"></script>
+    <script src="../shared/api.js"></script>
+    <script src="../shared/utils.js"></script>
     <script>
-        function login() {
-            const roll = document.getElementById("roll").value;
-            localStorage.setItem("studentRoll", roll);
-            window.location.href = "qr.html";
-        }
+        document.getElementById("studentLoginButton").addEventListener("click", async () => {
+            const collegeId = document.getElementById("collegeId").value.trim();
+
+            if (!collegeId) {
+                showMessage("studentLoginMessage", "Please enter college ID.", "error");
+                return;
+            }
+
+            try {
+                const response = await apiRequest("/api/student/login", {
+                    method: "POST",
+                    body: JSON.stringify({ college_id: collegeId })
+                });
+                persistJson("studentSession", response.student);
+                window.location.href = "qr.html";
+            } catch (error) {
+                showMessage("studentLoginMessage", error.message, "error");
+            }
+        });
     </script>
-
 </body>
-
 </html>

@@ -1,28 +1,57 @@
-<!-- Login as -->
-
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guard Login</title>
+    <link rel="stylesheet" href="../style/global.css">
 </head>
-
 <body>
+    <main class="shell">
+        <section class="hero">
+            <div>
+                <div class="eyebrow">Main Gate Guard Portal</div>
+                <h2>Guard Login</h2>
+                <p class="muted">Sample guard IDs: GRD-101, GRD-102</p>
+            </div>
+            <a class="button-link secondary" href="../index.html">Back to Home</a>
+        </section>
 
-    <h2>Guard Login</h2>
+        <section class="panel">
+            <div class="form-group">
+                <label for="guardId">Guard ID</label>
+                <input id="guardId" placeholder="Enter guard ID">
+            </div>
+            <div class="actions">
+                <button id="guardLoginButton">Login</button>
+            </div>
+            <div id="guardLoginMessage"></div>
+        </section>
+    </main>
 
-    <input id="name" placeholder="Enter Name">
-    <br><br>
-    <button onclick="login()">Login</button>
-
+    <script src="../shared/config.js"></script>
+    <script src="../shared/api.js"></script>
+    <script src="../shared/utils.js"></script>
     <script>
-        function login() {
-            const name = document.getElementById("name").value;
-            localStorage.setItem("guardName", name);
-            window.location.href = "scan.html";
-        }
+        document.getElementById("guardLoginButton").addEventListener("click", async () => {
+            const guardId = document.getElementById("guardId").value.trim();
+
+            if (!guardId) {
+                showMessage("guardLoginMessage", "Please enter guard ID.", "error");
+                return;
+            }
+
+            try {
+                const response = await apiRequest("/api/guard/login", {
+                    method: "POST",
+                    body: JSON.stringify({ guard_id: guardId })
+                });
+                persistJson("guardSession", response.guard);
+                window.location.href = "scan.html";
+            } catch (error) {
+                showMessage("guardLoginMessage", error.message, "error");
+            }
+        });
     </script>
-
 </body>
-
 </html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../style/global.css">
+</head>
+<body>
+    <main class="shell">
+        <section class="hero">
+            <div>
+                <div class="eyebrow">Dashboard</div>
+                <h2>IIT Patna Main Gate Dashboard</h2>
+                <p class="muted">Daily entry, exit, student records, guard records, and CSV export.</p>
+            </div>
+            <div class="actions">
+                <a class="button-link secondary" href="../index.html">Home</a>
+                <button class="secondary" id="adminLogoutButton">Logout</button>
+            </div>
+        </section>
+
+        <section class="grid-3" id="metrics"></section>
+
+        <section class="panel">
+            <div class="actions">
+                <a class="button-link" href="http://127.0.0.1:5000/api/admin/export/attendance" target="_blank" rel="noreferrer">Export Attendance CSV</a>
+                <a class="button-link secondary" href="http://127.0.0.1:5000/api/admin/export/students" target="_blank" rel="noreferrer">Export Students CSV</a>
+                <a class="button-link secondary" href="http://127.0.0.1:5000/api/admin/export/guards" target="_blank" rel="noreferrer">Export Guards CSV</a>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h3>Attendance Logs</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Roll</th>
+                            <th>Action</th>
+                            <th>Date & Time</th>
+                            <th>Phone</th>
+                            <th>Guard</th>
+                            <th>Guard Phone</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="grid-2">
+            <article class="panel">
+                <h3>Student Records</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>College ID</th>
+                                <th>Roll</th>
+                                <th>Course</th>
+                                <th>Validity</th>
+                                <th>Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody"></tbody>
+                    </table>
+                </div>
+            </article>
+
+            <article class="panel">
+                <h3>Guard Records</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Guard ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody id="guardsTableBody"></tbody>
+                    </table>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script src="../shared/config.js"></script>
+    <script src="../shared/api.js"></script>
+    <script src="../shared/utils.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

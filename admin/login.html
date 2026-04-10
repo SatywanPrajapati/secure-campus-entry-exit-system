@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="../style/global.css">
+</head>
+<body>
+    <main class="shell">
+        <section class="hero">
+            <div>
+                <div class="eyebrow">Admin Control Room</div>
+                <h2>Admin Login</h2>
+                <p class="muted">Demo credentials: admin / admin123</p>
+            </div>
+            <a class="button-link secondary" href="../index.html">Back to Home</a>
+        </section>
+
+        <section class="panel">
+            <div class="form-group">
+                <label for="adminUsername">Username</label>
+                <input id="adminUsername" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="adminPassword">Password</label>
+                <input id="adminPassword" type="password" placeholder="Enter password">
+            </div>
+            <div class="actions">
+                <button id="adminLoginButton">Login</button>
+            </div>
+            <div id="adminLoginMessage"></div>
+        </section>
+    </main>
+
+    <script src="../shared/config.js"></script>
+    <script src="../shared/api.js"></script>
+    <script src="../shared/utils.js"></script>
+    <script>
+        document.getElementById("adminLoginButton").addEventListener("click", async () => {
+            const username = document.getElementById("adminUsername").value.trim();
+            const password = document.getElementById("adminPassword").value.trim();
+
+            try {
+                const response = await apiRequest("/api/admin/login", {
+                    method: "POST",
+                    body: JSON.stringify({ username, password })
+                });
+                persistJson("adminSession", response.admin);
+                window.location.href = "dashboard.html";
+            } catch (error) {
+                showMessage("adminLoginMessage", error.message, "error");
+            }
+        });
+    </script>
+</body>
+</html>

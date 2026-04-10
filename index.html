@@ -1,25 +1,34 @@
-<!-- HOME Page -->
-
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>IITP Gate Entry System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIT Patna Main Gate Attendance System</title>
     <link rel="stylesheet" href="style/global.css">
 </head>
-
 <body>
-
-    <div class="container">
-        <h1>IITP Gate Entry System</h1>
-
-        <div class="card-container">
-            <a href="student/login.html" class="card">Login as Student</a>
-            <a href="guard/login.html" class="card">Login as Guard</a>
-            <a href="admin/login.html" class="card">Login as IITP Admin</a>
-        </div>
-    </div>
-
+    <main class="shell">
+        <section class="hero">
+            <div>
+                <div class="eyebrow">IIT Patna Main Gate Security</div>
+                <h1>IIT Patna Student Entry and Exit Attendance System</h1>
+                <p class="muted">Student QR, guard approval, and admin dashboard with CSV attendance records.</p>
+            </div>
+        </section>
+        <section class="grid-3">
+            <a class="card-link" href="student/login.html">
+                <h3>Student Login</h3>
+                <p>Login with college ID, verify profile, and show a 60-second dynamic QR.</p>
+            </a>
+            <a class="card-link" href="guard/login.html">
+                <h3>Guard Login</h3>
+                <p>Login with guard ID, scan or paste QR token, review details, and approve IN or OUT.</p>
+            </a>
+            <a class="card-link" href="admin/login.html">
+                <h3>Admin Panel</h3>
+                <p>View dashboard metrics, attendance logs, student and guard data, and export CSV files.</p>
+            </a>
+        </section>
+    </main>
 </body>
-
 </html>

@@ -1,18 +1,61 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Generate QR</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student QR</title>
+    <link rel="stylesheet" href="../style/global.css">
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
-
 <body>
+    <main class="shell">
+        <section class="hero">
+            <div>
+                <div class="eyebrow">Student QR Pass</div>
+                <h2 id="studentNameHeading">Student Details</h2>
+                <p class="muted">QR auto refreshes every 60 seconds. Guard must scan before timer ends.</p>
+            </div>
+            <div class="actions">
+                <a class="button-link secondary" href="../index.html">Home</a>
+                <button class="secondary" id="studentLogoutButton">Logout</button>
+            </div>
+        </section>
 
-    <h2>Your QR Code</h2>
-    <canvas id="qr"></canvas>
+        <section class="grid-2">
+            <article class="panel">
+                <div class="identity">
+                    <img id="studentPhoto" alt="Student photo">
+                    <div>
+                        <h3 id="studentName"></h3>
+                        <div class="detail-list">
+                            <div class="detail-item"><span>College ID</span><strong id="studentCollegeId"></strong></div>
+                            <div class="detail-item"><span>Roll Number</span><strong id="studentRollNumber"></strong></div>
+                            <div class="detail-item"><span>Course</span><strong id="studentCourse"></strong></div>
+                            <div class="detail-item"><span>Validity</span><strong id="studentValidity"></strong></div>
+                            <div class="detail-item"><span>Phone</span><strong id="studentPhone"></strong></div>
+                            <div class="detail-item"><span>Email</span><strong id="studentEmail"></strong></div>
+                        </div>
+                        <h4>Signature</h4>
+                        <img id="studentSignature" class="signature-preview" alt="Student signature">
+                    </div>
+                </div>
+            </article>
 
+            <article class="panel">
+                <div class="qr-wrap">
+                    <canvas id="qrCanvas"></canvas>
+                    <div class="timer" id="qrTimer">60s</div>
+                    <div class="muted">Share only with the guard at main gate.</div>
+                    <button id="refreshQrButton" class="secondary">Refresh QR Now</button>
+                </div>
+                <div id="qrMessage"></div>
+            </article>
+        </section>
+    </main>
+
+    <script src="../shared/config.js"></script>
+    <script src="../shared/api.js"></script>
+    <script src="../shared/utils.js"></script>
     <script src="student.js"></script>
-
 </body>
-
 </html>

@@ -1,24 +1,101 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Scan QR</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guard Scanner</title>
+    <link rel="stylesheet" href="../style/global.css">
     <script src="https://unpkg.com/html5-qrcode"></script>
 </head>
-
 <body>
+    <main class="shell">
+        <section class="hero">
+            <div>
+                <div class="eyebrow">Guard Approval Desk</div>
+                <h2 id="guardWelcome">Scan Student QR</h2>
+                <p class="muted">Guard reviews the student details before approving IN or OUT.</p>
+            </div>
+            <div class="actions">
+                <a class="button-link secondary" href="../index.html">Home</a>
+                <button class="secondary" id="guardLogoutButton">Logout</button>
+            </div>
+        </section>
 
-    <h2>Scan Student QR</h2>
+        <section class="grid-2">
+            <article class="panel">
+                <h3>Guard Profile</h3>
+                <div class="identity" style="margin-bottom: 20px;">
+                    <img id="guardPhoto" alt="Guard photo">
+                    <div>
+                        <div class="detail-list">
+                            <div class="detail-item"><span>Name</span><strong id="guardName">-</strong></div>
+                            <div class="detail-item"><span>Guard ID</span><strong id="guardIdValue">-</strong></div>
+                            <div class="detail-item"><span>Email</span><strong id="guardEmail">-</strong></div>
+                            <div class="detail-item"><span>Phone</span><strong id="guardPhone">-</strong></div>
+                        </div>
+                    </div>
+                </div>
 
-    <div id="reader" style="width:300px;"></div>
+                <h3>Scanner</h3>
+                <p class="muted">Use camera scan if available, or paste QR token manually.</p>
+                <div id="reader" style="width:100%; min-height:280px;"></div>
+                <div class="form-group">
+                    <label for="manualToken">Manual QR Token</label>
+                    <textarea id="manualToken" placeholder="Paste decoded QR token if camera is not available"></textarea>
+                </div>
+                <div class="actions">
+                    <button id="manualPreviewButton">Preview Student</button>
+                </div>
+                <div id="scanMessage"></div>
+            </article>
 
-    <div id="result"></div>
+            <article class="panel">
+                <div class="identity">
+                    <img id="previewPhoto" alt="Student photo preview">
+                    <div>
+                        <h3 id="previewName">No student scanned yet</h3>
+                        <div class="detail-list">
+                            <div class="detail-item"><span>College ID</span><strong id="previewCollegeId">-</strong></div>
+                            <div class="detail-item"><span>Roll Number</span><strong id="previewRoll">-</strong></div>
+                            <div class="detail-item"><span>Course</span><strong id="previewCourse">-</strong></div>
+                            <div class="detail-item"><span>Validity</span><strong id="previewValidity">-</strong></div>
+                            <div class="detail-item"><span>Phone</span><strong id="previewPhone">-</strong></div>
+                            <div class="detail-item"><span>Allowed Next Step</span><strong id="previewNextAction">-</strong></div>
+                        </div>
+                        <h4>Signature</h4>
+                        <img id="previewSignature" class="signature-preview" alt="Student signature preview">
+                    </div>
+                </div>
 
-    <button onclick="entry()">Allow Entry</button>
-    <button onclick="exit()">Allow Exit</button>
+                <div class="form-group">
+                    <label for="attendanceAction">Attendance Action</label>
+                    <select id="attendanceAction">
+                        <option value="IN">IN</option>
+                        <option value="OUT">OUT</option>
+                    </select>
+                </div>
 
+                <div class="form-group">
+                    <label for="attendanceNote">Guard Note</label>
+                    <textarea id="attendanceNote" placeholder="Optional note"></textarea>
+                </div>
+
+                <label class="checkbox-row" for="termsAccepted">
+                    <input id="termsAccepted" type="checkbox">
+                    <span>I confirm that on this date and time I am approving the selected IN or OUT status after checking the student details.</span>
+                </label>
+
+                <div class="actions" style="margin-top: 16px;">
+                    <button id="approveButton" class="success" disabled>Approve Attendance</button>
+                </div>
+                <div id="approvalMessage"></div>
+            </article>
+        </section>
+    </main>
+
+    <script src="../shared/config.js"></script>
+    <script src="../shared/api.js"></script>
+    <script src="../shared/utils.js"></script>
     <script src="guard.js"></script>
-
 </body>
-
 </html>
